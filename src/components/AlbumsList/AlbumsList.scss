@@ -1,0 +1,26 @@
+.AlbumsList {
+  border: 1px solid black;
+
+  &__list {    
+    width: 70%;
+    margin: auto;
+    text-align: center;    
+  }
+
+  &__item {
+    align-items: center;
+    display: inline-block;
+    border: 1px solid black;
+    margin: 20px;
+    vertical-align: top;
+  }
+
+  &__album-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    height: 200px;
+    width: 200px;
+    cursor: pointer;
+  }
+}
