@@ -36,6 +36,7 @@ export default class App extends Component {
 
 
   render() {
+    window.scrollTo(0,0);
     return (
       <>
         <AlbumsList
