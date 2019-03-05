@@ -1,37 +1,54 @@
 import React, { Component } from "react";
 import AlbumsList from "../AlbumsList/AlbumsList";
+import PhotoList from "../PhotoList/PhotoList";
 import Pagination from "../Pagination/Pagination";
+import { Switch, Route } from "react-router-dom";
 import api from "../API/API";
 import 'normalize.css'
 
 export default class App extends Component {
   state = {
     albums: [],
-    visibleAlbums: [],
+    photo: [],
+    visibleItems: [],
     currentPage: 1,
     quantityItemsOnPage: 20,
+    generalQuantityAlbums: 0,
+    whatToRender: 'albums',
   };
+
+  setPaginationRender = (whatToRender) => {
+    this.setState({
+      whatToRender
+    }, () => this.setVisibleItems())
+  }
 
   async componentDidMount() {
     const albums = await api.getAlbums();
-    this.setState({ albums }, () => this.setVisibleAlbums());
+    const photo = await api.getPhoto();
+    
+    this.setState({ 
+      albums,
+      photo,
+    }, () => this.setVisibleItems());
   }
 
-  setVisibleAlbums = () => {
-    this.setState(prevState => {
+  setVisibleItems = () => {    
+    this.setState(prevState => { 
       const startIndex = (this.state.currentPage - 1) * this.state.quantityItemsOnPage;
       const endIndex = startIndex + this.state.quantityItemsOnPage;
-      const visibleAlbums = prevState.albums.slice(startIndex, endIndex);
+      const visibleItems = prevState[this.state.whatToRender].slice(startIndex, endIndex);
 
       return {
-        visibleAlbums
+        visibleItems,
+        generalQuantityAlbums: this.state[this.state.whatToRender].length
       }
     });
   };
 
 
   selectPage = (currentPage) => {
-    this.setState({ currentPage }, () => this.setVisibleAlbums())
+    this.setState({ currentPage }, () => this.setVisibleItems())
   }
 
 
@@ -39,13 +56,14 @@ export default class App extends Component {
     window.scrollTo(0,0);
     return (
       <>
-        <AlbumsList
-           albums={this.state.visibleAlbums}
-        />
+        <Switch >
+          <Route exact path="/" render={() => <AlbumsList albums={this.state.visibleItems} setItemsForPagination={this.setItemsForPagination} />} />
+          <Route path="/albums/:id" render={(props) => <PhotoList {...props}  photo={ this.state.photo } setVisibleItems={this.setPaginationRender} />} />
+        </Switch>
         <Pagination 
           currentPage={this.state.currentPage} 
-          visibleAlbums={this.state.visibleAlbums} 
-          generalQuantityAlbums={this.state.albums.length}
+          visibleAlbums={this.state.visibleItems} 
+          generalQuantityAlbums={this.state.generalQuantityAlbums}
           selectPage={this.selectPage}
         />
       </>

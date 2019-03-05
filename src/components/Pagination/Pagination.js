@@ -1,50 +1,65 @@
 import React, { Component } from "react";
-import './Pagination.scss'
+import "./Pagination.scss";
 
 export default class Pagination extends Component {
   get paginationBtns() {
     if (this.props.visibleAlbums.length > 0) {
-        const quantityPaginationBtns = this.props.generalQuantityAlbums / this.props.visibleAlbums.length;
-        const paginationBtns = [];
+      const quantityPaginationBtns = this.props.generalQuantityAlbums / this.props.visibleAlbums.length;
+      const buttons = [];
+      const start = Math.max(1, this.props.currentPage - 5);
+      const end = Math.min(quantityPaginationBtns,this.props.currentPage + 5);
 
-        for (let i = 1; i <= quantityPaginationBtns; i++) {
-          paginationBtns.push(i);
-        }
-      return paginationBtns;
+      for (let i = start; i <= end; i++) {
+        buttons.push(i);
+      }
+      return buttons;
     } else {
       return [];
     }
   }
 
-  getCurrentPage = btn => {
-    return () => {
-      this.props.selectPage(btn);
-    };
-  };
+  getCurrentPage = btn => () => this.props.selectPage(btn);
 
   changePages = currentPage => {
     return () => {
-      let selectedPage = Math.max(1, Math.min(this.paginationBtns.length, currentPage));
+      let selectedPage = Math.max(
+        1,
+        Math.min(this.paginationBtns.length, currentPage)
+      );
       this.props.selectPage(selectedPage);
     };
   };
 
-  render() {    
+  render() { 
     return (
       <div className="Pagination">
-         <button className="Pagination__btns" onClick={this.changePages(this.props.currentPage - 1)}>Prev</button>
-        {
-          this.paginationBtns.map(btn => (
-            <button
-              className={`Pagination__btns ${btn === this.props.currentPage ? 'Pagination__btns--active' : ''}`}
-              key={btn}
-              onClick={this.getCurrentPage(btn)}
-            >
-              {btn}
-            </button>
-          ))
-        }
-        <button className="Pagination__btns" onClick={this.changePages(this.props.currentPage + 1)}>Next</button>
+        <button
+          className="Pagination__btns"
+          onClick={this.changePages(this.props.currentPage - 1)}
+        >
+          Prev
+        </button>
+        {this.props.currentPage > 5 ? '...' : ''}
+        {this.paginationBtns.map(btn => (
+          <button
+            className={`Pagination__btns ${
+              btn === this.props.currentPage ? "Pagination__btns--active" : ""
+            }`}
+            key={btn}
+            onClick={this.getCurrentPage(btn)}
+          >
+            {btn}
+          </button>
+        ))}      
+
+        {this.paginationBtns.length > 5 ? '...' : ''}
+
+        <button
+          className="Pagination__btns"
+          onClick={this.changePages(this.props.currentPage + 1)}
+        >        
+          Next
+        </button>
       </div>
     );
   }
