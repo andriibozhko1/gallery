@@ -22,10 +22,7 @@ export default class Pagination extends Component {
 
   changePages = currentPage => {
     return () => {
-      let selectedPage = Math.max(
-        1,
-        Math.min(this.paginationBtns.length, currentPage)
-      );
+      let selectedPage = Math.max(1,Math.min(this.paginationBtns.length, currentPage));
       this.props.selectPage(selectedPage);
     };
   };
@@ -33,31 +30,20 @@ export default class Pagination extends Component {
   render() { 
     return (
       <div className="Pagination">
-        <button
-          className="Pagination__btns"
-          onClick={this.changePages(this.props.currentPage - 1)}
-        >
+        <button className="Pagination__btns" onClick={this.changePages(this.props.currentPage - 1)}>
           Prev
         </button>
         {this.props.currentPage > 5 ? '...' : ''}
         {this.paginationBtns.map(btn => (
-          <button
-            className={`Pagination__btns ${
-              btn === this.props.currentPage ? "Pagination__btns--active" : ""
-            }`}
-            key={btn}
-            onClick={this.getCurrentPage(btn)}
-          >
-            {btn}
+          <button 
+            className={`Pagination__btns ${ btn === this.props.currentPage ? "Pagination__btns--active" : "" }`}
+            key={btn} 
+            onClick={this.getCurrentPage(btn)}>
+              {btn}
           </button>
         ))}      
-
         {this.paginationBtns.length > 5 ? '...' : ''}
-
-        <button
-          className="Pagination__btns"
-          onClick={this.changePages(this.props.currentPage + 1)}
-        >        
+        <button className="Pagination__btns" onClick={this.changePages(this.props.currentPage + 1)} >        
           Next
         </button>
       </div>
