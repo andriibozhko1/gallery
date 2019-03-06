@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Pagination from "../Pagination/Pagination";
+import PhotoCard from "./PhotoCard"
 import { Link } from "react-router-dom";
 import './PhotoList.scss';
 
@@ -34,22 +35,12 @@ export default class PhotoList extends Component {
       <>  
           <div className="PhotoList">
             <ul className="PhotoList__list">
-              {this.visiblePhoto.map(photo => {
-                console.log(photo);
-
-                return (                  
-                    <li className="PhotoList__item">
-                      <div className="PhotoList__photo-card">
-                        <div className="PhotoList__photo-card-img-block">
-                          <img className="PhotoList__photo-card-img" src={photo.url} alt={photo.title}/>
-                        </div>
-                        <div className="PhotoList__photo-card-title">
-                          { photo.title }
-                        </div>
-                      </div>
-                    </li>
-                )
-              })}
+              {this.visiblePhoto.map(photo => 
+              (                  
+               <li key={photo.id} className="PhotoList__item">
+                  <PhotoCard photoData={ photo } tags={this.props.tags}/>
+               </li>
+              ))}
             </ul>
           </div>
           <Pagination 

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Pagination from "../Pagination/Pagination";
+import AlbumsCard from "./AlbumsCard"
 import { Link } from "react-router-dom";
 import "./AlbumsList.scss";
 
@@ -31,16 +32,7 @@ export default class AlbumsList extends Component {
             {this.visibleAlbums.map(album => (
               <Link to={`albums/${album.id}`}>
                 <li className="AlbumsList__item" key={album.id}>
-                  <div className="AlbumsList__album-card">
-                    <div className="AlbumsList__content">
-                      <div className="AlbumsList__id">Album #: {album.id}</div>
-                      <br />
-                      <div className="AlbumsList__album-card-tittle">
-                        {" "}
-                        {album.title}
-                      </div>
-                    </div>
-                  </div>
+                  <AlbumsCard album={album}/>
                 </li>
               </Link>
             ))}

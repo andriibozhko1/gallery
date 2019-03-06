@@ -10,6 +10,7 @@ export default class App extends Component {
   state = {
     albums: [],
     photo: [],
+    tags: ['frontend', 'backend','javascript','react']
   }
 
   async componentDidMount() {
@@ -19,6 +20,9 @@ export default class App extends Component {
     this.setState({ albums, photo })
   }
 
+  updateData = () => {
+    
+  }
 
 
   render() {
@@ -26,7 +30,7 @@ export default class App extends Component {
       <>
         <Switch>
           <Route exact path="/" render={() => ( <AlbumsList albums={this.state.albums}/>)}/>
-          <Route path="/albums/:id" render={(props) => <PhotoList {...props}  photo={ this.state.photo } />} />
+          <Route path="/albums/:id" render={(props) => <PhotoList {...props}  photo={ this.state.photo } tags={this.state.tags}/>} />
         </Switch>
       </>
     );
