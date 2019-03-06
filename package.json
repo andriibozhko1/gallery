@@ -25,6 +25,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "lodash.debounce": "^4.0.8",
     "node-sass": "^4.11.0",
     "randomcolor": "^0.5.4"
   }

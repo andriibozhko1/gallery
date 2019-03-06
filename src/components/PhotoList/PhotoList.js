@@ -1,20 +1,33 @@
 import React, { Component } from "react";
 import Pagination from "../Pagination/Pagination";
 import PhotoCard from "./PhotoCard"
-import { Link } from "react-router-dom";
+import Header from "../Header/Header"
 import './PhotoList.scss';
 
 export default class PhotoList extends Component {
   state = {    
     currentPage: 1,
-    quantityItemsOnPage: 10,    
+    quantityItemsOnPage: 10,   
+    filteredByTagName: null, 
   }
 
   get filteredPhoto () {    
-    const filteredPhoto = this.props.photo.filter(photo => (
+    let filteredPhoto = this.props.photo.filter(photo => (
       photo.albumId === +this.props.match.params.id ? photo : null
     ))
 
+    if(this.state.filteredByTagName) {
+      var x = filteredPhoto.filter(photo => {
+        if(photo.tags.length > 0) {
+          return photo.tags.find(tagData => {
+            if(tagData.tag === this.state.filteredByTagName) {
+              return tagData
+            }
+          })
+        }
+      })
+      return x;
+    }    
     return filteredPhoto;
   };
 
@@ -30,9 +43,25 @@ export default class PhotoList extends Component {
     this.setState({ currentPage });
   }
 
+
+  setFilterTag = (tag) => {  
+    if(tag === 'null') {
+      this.setState({
+        filteredByTagName: null,
+      })
+      return;
+    } 
+
+    this.setState({
+      filteredByTagName: tag,
+    })
+  }
+
   render() {     
+    console.log(this.state);
     return (
       <>  
+        <Header tags={this.props.tags} setFilterTag={this.setFilterTag} />
           <div className="PhotoList">
             <ul className="PhotoList__list">
               {this.visiblePhoto.map(photo => 

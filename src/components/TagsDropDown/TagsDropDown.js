@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import randomColor from 'randomcolor';
 import './TagsDropDown.scss'
 
 export default class TagsDropDown extends Component {

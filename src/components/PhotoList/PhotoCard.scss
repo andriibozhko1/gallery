@@ -40,5 +40,30 @@
   &__tags-container {
     text-align: left;
     padding: 10px;
+
+    &-list {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    &-item {
+      color: #fff;
+      font-size: 17px;  
+      border-radius: 10px;      
+      margin: 4px;
+      padding: 17px;
+      padding-left: 40px;
+      position: relative;
+
+      &-dot {
+        position: absolute;
+        top: 35%;
+        left: 5%;
+        width: 15px;
+        height: 15px;
+        background: #fff;
+        border-radius: 100%;
+      }
+    }
   }
 }

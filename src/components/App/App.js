@@ -10,7 +10,8 @@ export default class App extends Component {
   state = {
     albums: [],
     photo: [],
-    tags: ['frontend', 'backend','javascript','react']
+    tags: ['Frontend', 'Backend','Javascript','React'],
+    filteredPhoto: null,
   }
 
   async componentDidMount() {
@@ -23,7 +24,7 @@ export default class App extends Component {
 
   updateData = (photoData) => {
     this.setState(({ photo }) => {
-      photo[photoData.id - 1].tags.push(photoData.tag);
+      photo[photoData.id - 1].tags.push(photoData);
       return {
         photo
       }
@@ -32,7 +33,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <>
+      <>       
         <Switch>
           <Route exact path="/" render={() => ( <AlbumsList albums={this.state.albums}/>)}/>
           <Route path="/albums/:id" render={(props) => (
@@ -42,6 +43,7 @@ export default class App extends Component {
                tags={this.state.tags} 
                updateData={this.updateData} />
              )} />
+          <Route exact path="/" render={() => ( <AlbumsList albums={this.state.albums}/>)}/>
         </Switch>
       </>
     );

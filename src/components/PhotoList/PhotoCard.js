@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TagsDropDown from "../TagsDropDown/TagsDropDown";
+import randomColor from 'randomcolor';
 import "./PhotoCard.scss";
 
 export default class PhotoCard extends Component {
@@ -15,12 +16,15 @@ export default class PhotoCard extends Component {
     });
   };
 
-  getTag = (tag) => {
-
+  getTag = (tag) => {    
     return () => {
       const id = this.props.photoData.id;
       
-      this.props.updateData({id, tag,})
+      this.props.updateData({        
+        id,
+        tag,
+        color: randomColor(),
+      })
       this.togglerDropDown();
     }
   }
@@ -37,9 +41,12 @@ export default class PhotoCard extends Component {
           <div className="PhotoCard__title">{title}</div>
           <div className="PhotoCard__tags-btn" onClick={this.togglerDropDown}>Add TAG</div>
           <div className="PhotoCard__tags-container">
-            <ul>
+            <ul className="PhotoCard__tags-container-list">
               {this.props.photoData.tags.map(tag => (
-                <li>{ tag }</li>
+                <li key={tag.color}  className="PhotoCard__tags-container-item" style={{backgroundColor: tag.color}}>
+                    <div className="PhotoCard__tags-container-item-dot"></div>
+                    { tag.tag }
+                </li>
               ))}  
             </ul>            
           </div>
