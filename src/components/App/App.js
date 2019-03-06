@@ -16,12 +16,13 @@ export default class App extends Component {
   async componentDidMount() {
     const albums = await api.getAlbums();
     const photo = await api.getPhoto();
+    photo.map(photo => photo.tags = []);
 
     this.setState({ albums, photo })
   }
 
   updateData = () => {
-    
+
   }
 
 

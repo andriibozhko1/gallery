@@ -23,12 +23,13 @@
     height: 100%;
   }
 
-  &__tags {    
+  &__tags-btn {    
     display: flex;
     justify-content: flex-end;
-    padding: 5px 25px 5px 5px;
+    padding: 5px 25px 5px 5px;    
     cursor: pointer;
     transition: .2s;
+    border-bottom: 1px solid #f5f5f5;
 
     &:hover {
       text-decoration: underline;

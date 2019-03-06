@@ -25,8 +25,11 @@ export default class PhotoCard extends Component {
             <img className="PhotoCard__img" src={url} alt={title} />
           </div>
           <div className="PhotoCard__title">{title}</div>
-          <div className="PhotoCard__tags" onClick={this.togglerDropDown}>Add TAG</div>
-          <TagsDropDown tags={this.props.tags} dropDownIsOpen={this.state.dropDownIsOpen}/>
+          <div className="PhotoCard__tags-btn" onClick={this.togglerDropDown}>Add TAG</div>
+          <div className="PhotoCard__tags-container">
+            123
+          </div>
+          <TagsDropDown tags={this.props.tags} dropDownIsOpen={this.state.dropDownIsOpen} />
         </div>
       </div>
     );
