@@ -2,17 +2,17 @@ import React, { Component } from "react";
 import "./Pagination.scss";
 
 export default class Pagination extends Component {
-  get paginationBtns() {
-    if (this.props.visibleAlbums.length > 0) {
-      const quantityPaginationBtns = this.props.generalQuantityAlbums / this.props.visibleAlbums.length;
+  get paginationBtns() {    
+    if (this.props.visibleItems.length > 0) {
+      const quantityPaginationBtns = this.props.generalQuantityItems / this.props.visibleItems.length;
       const buttons = [];
       const start = Math.max(1, this.props.currentPage - 5);
       const end = Math.min(quantityPaginationBtns,this.props.currentPage + 5);
 
-      for (let i = start; i <= end; i++) {
+      for (let i = start; i <= end; i++) {        
         buttons.push(i);
-      }
-      return buttons;
+      }      
+      return buttons;    
     } else {
       return [];
     }
