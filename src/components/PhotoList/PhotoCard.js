@@ -31,15 +31,18 @@ export default class PhotoCard extends Component {
 
   render() {
     const { url, title } = this.props.photoData;
-  
-    return (
+    window.scrollTo(0, 0);    
+    
+    return (      
       <div>
         <div className="PhotoCard">
           <div className="PhotoCard__img-block">
             <img className="PhotoCard__img" src={url} alt={title} />
           </div>
           <div className="PhotoCard__title">{title}</div>
-          <div className="PhotoCard__tags-btn" onClick={this.togglerDropDown}>Add TAG</div>
+          <div className="PhotoCard__tags-btn" onClick={this.togglerDropDown}>
+            Add TAG
+          </div>
           <div className="PhotoCard__tags-container">
             <ul className="PhotoCard__tags-container-list">
               {this.props.photoData.tags.map(tag => (
