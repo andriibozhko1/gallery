@@ -1,18 +1,25 @@
-import React, { Component } from 'react'
-import './TagsDropDown.scss'
+import React from "react";
+import Context from "../Context/Context";
+import "./TagsDropDown.scss";
 
-export default class TagsDropDown extends Component {
- 
-  render() {        
-    
-    return (
-      <div hidden={!this.props.dropDownIsOpen} className="TagsDropDown">
+const TagsDropDown = props => (
+  <Context.Consumer>
+    {({ tags }) => (
+      <div hidden={!props.dropDownIsOpen} className="TagsDropDown">
         <ul className="TagsDropDown__list">
-          {this.props.tags.map(tag => (
-            <div key={tag} onClick={this.props.getTag(tag)} className="TagsDropDown__item">{ tag }</div>
+          {tags.map(tag => (
+            <div
+              key={tag}
+              onClick={props.getTag(tag)}
+              className="TagsDropDown__item"
+            >
+              {tag}
+            </div>
           ))}
         </ul>
       </div>
-    )
-  }
-}
+    )}
+  </Context.Consumer>
+);
+
+export default TagsDropDown;

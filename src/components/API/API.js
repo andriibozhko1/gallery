@@ -6,7 +6,7 @@ const api = {
 
       return albums
   },
-  getPhoto() {
+   getPhoto() {
     const photo = fetch('https://jsonplaceholder.typicode.com/photos')
       .then(response => response.json())
         .then(json => json);

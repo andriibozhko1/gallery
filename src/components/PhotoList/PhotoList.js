@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Pagination from "../Pagination/Pagination";
 import PhotoCard from "./PhotoCard";
+import Context from "../Context/Context";
 import Header from "../Header/Header";
+import Loader from "../Loader/Loader"
 import { Link } from "react-router-dom";
 import "./PhotoList.scss";
 
@@ -13,8 +15,10 @@ export default class PhotoList extends Component {
     query: ""
   };
 
+  photo = [];
+
   get filteredPhoto() {
-    let filteredPhoto = this.props.photo.filter(photo =>
+    let filteredPhoto = this.photo.filter(photo =>
       photo.albumId === +this.props.match.params.id ? photo : null
     );
 
@@ -50,19 +54,14 @@ export default class PhotoList extends Component {
 
   setFilterTag = tag => {
     if (tag === "null") {
-      this.setState({
-        filteredByTagName: null
-      });
+      this.setState({ filteredByTagName: null });
       return;
     }
 
-    this.setState({
-      filteredByTagName: tag
-    });
+    this.setState({ filteredByTagName: tag });
   };
 
   setFilterQuery = query => {
-    console.log(query);
     this.setState({ query });
   };
 
@@ -70,37 +69,41 @@ export default class PhotoList extends Component {
     this.setState({ currentPage });
   };
 
-  render() {    
+  render() {
     return (
-      <>
-        <Link to="/">
-          <div className="PhotoList__btn-back">BACK</div>
-        </Link>
-        <Header
-          tags={this.props.tags}
-          setFilterTag={this.setFilterTag}
-          setFilterQuery={this.setFilterQuery}
-        />
-        <div className="PhotoList">
-          <ul className="PhotoList__list">
-            {this.visiblePhoto.map(photo => (
-              <li key={photo.id} className="PhotoList__item">
-                <PhotoCard
-                  photoData={photo}
-                  tags={this.props.tags}
-                  updateData={this.props.updateData}
+      <Context.Consumer>
+        {props => {
+          this.photo = props.photo;
+
+          if (props.isLoading) {
+            return <Loader />;
+          } else {
+            return (
+              <>
+                <Link to="/">
+                  <div className="PhotoList__btn-back">BACK</div>
+                </Link>
+                <Header setFilterTag={this.setFilterTag} setFilterQuery={this.setFilterQuery}/>
+                <div className="PhotoList">
+                  <ul className="PhotoList__list">
+                    {this.visiblePhoto.map(photo => (
+                      <li key={photo.id} className="PhotoList__item">
+                        <PhotoCard photoData={photo} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <Pagination
+                  currentPage={this.state.currentPage}
+                  visibleItems={this.visiblePhoto}
+                  generalQuantityItems={this.filteredPhoto.length}
+                  selectPage={this.selectPage}
                 />
-              </li>
-            ))}
-          </ul>
-        </div>
-        <Pagination
-          currentPage={this.state.currentPage}
-          visibleItems={this.visiblePhoto}
-          generalQuantityItems={this.filteredPhoto.length}
-          selectPage={this.selectPage}
-        />
-      </>
+              </>
+            );
+          }
+        }}
+      </Context.Consumer>
     );
   }
 }
