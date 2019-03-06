@@ -70,8 +70,7 @@ export default class PhotoList extends Component {
     this.setState({ currentPage });
   };
 
-  render() {
-    console.log(this.state);
+  render() {    
     return (
       <>
         <Link to="/">

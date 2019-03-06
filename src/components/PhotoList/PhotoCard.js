@@ -30,8 +30,7 @@ export default class PhotoCard extends Component {
   }
 
   render() {
-    const { url, title } = this.props.photoData;
-    window.scrollTo(0, 0);    
+    const { url, title } = this.props.photoData;       
     
     return (      
       <div>
