@@ -15,7 +15,15 @@ export default class Header extends Component {
     };
   };
 
-  changeTagFilter = () => {
+  sendQuery = () => {    
+    return (key) => {      
+      if(key.key === 'Enter') {        
+        this.props.setFilterQuery(this.state.query)
+      }        
+    }
+  }
+
+  changeTagFilter = () => {    
     return event => {
       console.log(event.target)
       this.setState({
@@ -28,11 +36,13 @@ export default class Header extends Component {
     return (
       <div className="Header">
         <input
+          className="Header__field"
           value={this.state.query}
           onChange={this.changeQuery()}
+          onKeyPress={this.sendQuery()}
           type="text"
         />
-        <select onChange={this.changeTagFilter()}>
+        <select onChange={this.changeTagFilter()} >
           <option value={'null'}>
             Reset
           </option>
