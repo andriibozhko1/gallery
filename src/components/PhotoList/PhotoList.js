@@ -38,7 +38,11 @@ export default class PhotoList extends Component {
               {this.visiblePhoto.map(photo => 
               (                  
                <li key={photo.id} className="PhotoList__item">
-                  <PhotoCard photoData={ photo } tags={this.props.tags}/>
+                  <PhotoCard 
+                    photoData={ photo } 
+                    tags={this.props.tags}
+                    updateData={this.props.updateData}  
+                  />
                </li>
               ))}
             </ul>

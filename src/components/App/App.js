@@ -21,17 +21,27 @@ export default class App extends Component {
     this.setState({ albums, photo })
   }
 
-  updateData = () => {
-
+  updateData = (photoData) => {
+    this.setState(({ photo }) => {
+      photo[photoData.id - 1].tags.push(photoData.tag);
+      return {
+        photo
+      }
+    })
   }
-
 
   render() {
     return (
       <>
         <Switch>
           <Route exact path="/" render={() => ( <AlbumsList albums={this.state.albums}/>)}/>
-          <Route path="/albums/:id" render={(props) => <PhotoList {...props}  photo={ this.state.photo } tags={this.state.tags}/>} />
+          <Route path="/albums/:id" render={(props) => (
+            <PhotoList 
+              {...props} 
+               photo={ this.state.photo }
+               tags={this.state.tags} 
+               updateData={this.updateData} />
+             )} />
         </Switch>
       </>
     );

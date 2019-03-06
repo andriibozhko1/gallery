@@ -15,9 +15,19 @@ export default class PhotoCard extends Component {
     });
   };
 
+  getTag = (tag) => {
+
+    return () => {
+      const id = this.props.photoData.id;
+      
+      this.props.updateData({id, tag,})
+      this.togglerDropDown();
+    }
+  }
+
   render() {
     const { url, title } = this.props.photoData;
-
+  
     return (
       <div>
         <div className="PhotoCard">
@@ -27,9 +37,17 @@ export default class PhotoCard extends Component {
           <div className="PhotoCard__title">{title}</div>
           <div className="PhotoCard__tags-btn" onClick={this.togglerDropDown}>Add TAG</div>
           <div className="PhotoCard__tags-container">
-            123
+            <ul>
+              {this.props.photoData.tags.map(tag => (
+                <li>{ tag }</li>
+              ))}  
+            </ul>            
           </div>
-          <TagsDropDown tags={this.props.tags} dropDownIsOpen={this.state.dropDownIsOpen} />
+          <TagsDropDown 
+            tags={this.props.tags} 
+            dropDownIsOpen={this.state.dropDownIsOpen} 
+            getTag={this.getTag}
+          />
         </div>
       </div>
     );

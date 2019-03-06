@@ -30,8 +30,8 @@ export default class AlbumsList extends Component {
         <div className="AlbumsList">
           <ul className="AlbumsList__list">
             {this.visibleAlbums.map(album => (
-              <Link to={`albums/${album.id}`}>
-                <li className="AlbumsList__item" key={album.id}>
+              <Link key={album.id}  to={`albums/${album.id}`}>
+                <li className="AlbumsList__item">
                   <AlbumsCard album={album}/>
                 </li>
               </Link>
