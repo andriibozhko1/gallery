@@ -4,6 +4,7 @@ body {
 
 .AlbumsList {
   font-family: sans-serif;
+  transition: .5s;
 
   a {
     text-decoration: none;
@@ -11,20 +12,22 @@ body {
   }
   
   &__list {    
-    width: 70%;
-    margin: auto;
+    width: 90%;
     text-align: center;    
+    list-style: none;
   }
 
   &__item {
-    align-items: center;
-    display: inline-block;
-    margin: 10px;
+    align-items: center;;
     vertical-align: top;
     transition: .3s;
+    border-bottom: 1px solid silver;
+    margin-left: 5%;
 
     &:hover {      
-      transform: perspective(400px) translateZ(50px);      
+      transform: perspective(400px) translateZ(50px);   
+      background: #250114;   
+      color: #fff;
     }
 
     &:hover .AlbumsList__album-card {
@@ -37,25 +40,30 @@ body {
   }
 
   &__album-card {
+    border: 10px solid #1b0310;
     box-shadow: 0px 0px 10px silver;
-    border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;    
-    background: #fff;
+    background: #880e4f;
     padding: 10px;
-    height: 200px;
-    width: 200px;
+    height: 250px;
+    width: 250px;
     cursor: pointer;
     transition: .3s;
     font-size: 21px;
     font-weight: 100;
-    margin-bottom: 15px;
+
+    &-title {
+      position: absolute;
+      left: 50%;
+      font-size: 28px;
+    }
   }
 
   &__id {
     font-weight: 100;
-    color: #2e859e;
+    color: #fff;
     border-bottom: 1px solid #f5f5f5;
   }
 }

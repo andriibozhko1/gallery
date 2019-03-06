@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import "./AlbumsList.scss";
 import Loader from '../Loader/Loader'
 
-export default class AlbumsList extends Component {
+export default class AlbumsList extends Component { 
   state = {    
     currentPage: 1,
     quantityItemsOnPage: 20,

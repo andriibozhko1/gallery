@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types'
 import Pagination from "../Pagination/Pagination";
 import PhotoCard from "./PhotoCard";
 import Context from "../Context/Context";
@@ -8,6 +9,13 @@ import { Link } from "react-router-dom";
 import "./PhotoList.scss";
 
 export default class PhotoList extends Component {
+  static propTypes = {
+    currentPage:  PropTypes.number.isRequired,
+    quantityItemsOnPage: PropTypes.number.isRequired,
+    query: PropTypes.string.isRequired
+  }
+
+
   state = {
     currentPage: 1,
     quantityItemsOnPage: 10,
@@ -21,7 +29,7 @@ export default class PhotoList extends Component {
     let filteredPhoto = this.photo.filter(photo =>
       photo.albumId === +this.props.match.params.id ? photo : null
     );
-
+    
     if (this.state.filteredByTagName) {
       filteredPhoto = filteredPhoto.filter(photo => {
         if (photo.tags.length > 0) {
@@ -44,11 +52,11 @@ export default class PhotoList extends Component {
   }
 
   get visiblePhoto() {
-    const startIndex =
-      (this.state.currentPage - 1) * this.state.quantityItemsOnPage;
+    const startIndex = (this.state.currentPage - 1) * this.state.quantityItemsOnPage;
     const endIndex = startIndex + this.state.quantityItemsOnPage;
     const visiblePhoto = this.filteredPhoto.slice(startIndex, endIndex);
-
+    
+    window.scrollTo(0, 0);
     return visiblePhoto;
   }
 
@@ -81,7 +89,7 @@ export default class PhotoList extends Component {
             return (
               <>
                 <Link to="/">
-                  <div className="PhotoList__btn-back">BACK</div>
+                  <div className="PhotoList__btn-back">Home</div>
                 </Link>
                 <Header setFilterTag={this.setFilterTag} setFilterQuery={this.setFilterQuery}/>
                 <div className="PhotoList">

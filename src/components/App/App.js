@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types'
 import AlbumsList from "../AlbumsList/AlbumsList";
 import PhotoList from "../PhotoList/PhotoList";
 import Context from '../Context/Context'
@@ -7,10 +8,16 @@ import api from "../API/API";
 import "normalize.css";
 
 export default class App extends Component {
+  static propTypes = {
+    albums: PropTypes.array.isRequired,
+    photo: PropTypes.array.isRequired,
+    isLoading: PropTypes.bool,
+  };
+
   state = {
     albums: [],
     photo: [],
-    tags: ["Frontend", "Backend", "Javascript", "React"],
+    tags: ["Frontend", "Backend", "Javascript", "React","Node.js","PHP","C#","Vue","Angular"],
     filteredPhoto: null,
     isLoading: true,
   };

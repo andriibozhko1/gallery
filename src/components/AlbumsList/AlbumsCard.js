@@ -9,7 +9,7 @@ const AlbumsCard = ( props ) => {
       <div className="AlbumsList__content">
         <div className="AlbumsList__id">Album #: { id }</div>
         <br />
-        <div className="AlbumsList__album-card-tittle"> { title }</div>
+        <div className="AlbumsList__album-card-title"> { title }</div>
       </div>
     </div>
   );

@@ -1,8 +1,12 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types'
 import Context from "../Context/Context";
 import "./Header.scss";
 
 export default class Header extends Component {
+  static propTypes = {
+    query: PropTypes.string.isRequired,
+  };
   state = {
     query: "",
     filterByTag: null
@@ -41,14 +45,19 @@ export default class Header extends Component {
       <Context.Consumer>
         {({ tags }) => (
           <div className="Header">
-            <input
-              className="Header__field"
-              value={this.state.query}
-              onChange={this.changeQuery()}
-              onKeyPress={this.sendQuery()}
-              type="text"
-            />
-            <select onChange={this.changeTagFilter()}>
+            <label className="Header__title">
+              Search:
+              <input
+                className="Header__field"
+                value={this.state.query}
+                onChange={this.changeQuery()}
+                onKeyPress={this.sendQuery()}
+                placeholder="Search something..."
+                type="text"
+              />
+            </label>
+            <span className="Header__title">Sort By:</span>
+            <select className="Header__drop-down" onChange={this.changeTagFilter()}>
               <option value={"null"}>Reset</option>
               {tags.map(tag => (
                 <option key={tag} value={tag}>

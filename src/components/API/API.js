@@ -1,16 +1,13 @@
 const api = {
-   getAlbums() {
-    const albums = fetch('https://jsonplaceholder.typicode.com/albums')
-      .then(response => response.json())
-        .then(json => json);
-
-      return albums
+   async getAlbums() {
+        const response = await fetch('https://jsonplaceholder.typicode.com/albums');
+	      const albums = await response.json();
+	      return albums;
   },
-   getPhoto() {
-    const photo = fetch('https://jsonplaceholder.typicode.com/photos')
-      .then(response => response.json())
-        .then(json => json);
-      return photo
+  async getPhoto() {
+    const response = await fetch('https://jsonplaceholder.typicode.com/photos');
+    const photo = await response.json();
+    return photo;
   }
 }
 
