@@ -1,8 +1,8 @@
 const api = {
    async getAlbums() {
-        const response = await fetch('https://jsonplaceholder.typicode.com/albums');
-	      const albums = await response.json();
-	      return albums;
+      const response = await fetch('https://jsonplaceholder.typicode.com/albums');
+      const albums = await response.json();
+      return albums;
   },
   async getPhoto() {
     const response = await fetch('https://jsonplaceholder.typicode.com/photos');
