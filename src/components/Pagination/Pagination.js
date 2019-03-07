@@ -1,7 +1,15 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types'
 import "./Pagination.scss";
 
 export default class Pagination extends Component {
+  static propTypes = {
+    currentPage: PropTypes.number,
+    visibleItems: PropTypes.array,
+    selectPage: PropTypes.func,
+    generalQuantityItems: PropTypes.number
+  };
+
   get paginationBtns() {    
     if (this.props.visibleItems.length > 0) {
       const quantityPaginationBtns = this.props.generalQuantityItems / this.props.visibleItems.length;

@@ -1,21 +1,13 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types'
-import Pagination from "../Pagination/Pagination";
+import Pagination from "../../components/Pagination/Pagination";
 import PhotoCard from "./PhotoCard";
-import Context from "../Context/Context";
+import { ContextConsumer } from "../../Context/Context"
 import Header from "../Header/Header";
-import Loader from "../Loader/Loader"
+import Loader from "../../components/Loader/Loader"
 import { Link } from "react-router-dom";
 import "./PhotoList.scss";
 
 export default class PhotoList extends Component {
-  static propTypes = {
-    currentPage:  PropTypes.number.isRequired,
-    quantityItemsOnPage: PropTypes.number.isRequired,
-    query: PropTypes.string.isRequired
-  }
-
-
   state = {
     currentPage: 1,
     quantityItemsOnPage: 10,
@@ -79,7 +71,7 @@ export default class PhotoList extends Component {
 
   render() {
     return (
-      <Context.Consumer>
+      <ContextConsumer>
         {props => {
           this.photo = props.photo;
 
@@ -111,7 +103,7 @@ export default class PhotoList extends Component {
             );
           }
         }}
-      </Context.Consumer>
+      </ContextConsumer>
     );
   }
 }

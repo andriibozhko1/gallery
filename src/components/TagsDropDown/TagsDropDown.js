@@ -1,9 +1,10 @@
 import React from "react";
-import Context from "../Context/Context";
+import { ContextConsumer } from "../../Context/Context"
+import propTypes from 'prop-types'
 import "./TagsDropDown.scss";
 
-const TagsDropDown = props => (
-  <Context.Consumer>
+const TagsDropDown = props => (  
+  <ContextConsumer>
     {({ tags }) => (
       <div hidden={!props.dropDownIsOpen} className="TagsDropDown">
         <ul className="TagsDropDown__list">
@@ -19,7 +20,12 @@ const TagsDropDown = props => (
         </ul>
       </div>
     )}
-  </Context.Consumer>
+  </ContextConsumer>
 );
+
+TagsDropDown.propTypes = {
+  dropDownIsOpen: propTypes.bool,
+  getTag: propTypes.func,
+}
 
 export default TagsDropDown;

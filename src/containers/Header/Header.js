@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types'
-import Context from "../Context/Context";
+import { ContextConsumer } from "../../Context/Context"
 import "./Header.scss";
 
 export default class Header extends Component {
   static propTypes = {
-    query: PropTypes.string.isRequired,
+    setFilterQuery: PropTypes.func,
+    setFilterTag: PropTypes.func
   };
+  
   state = {
     query: "",
     filterByTag: null
@@ -29,8 +31,7 @@ export default class Header extends Component {
   };
 
   changeTagFilter = () => {
-    return event => {
-      console.log(event.target);
+    return event => {      
       this.setState(
         {
           filterByTag: event.target.value
@@ -42,7 +43,7 @@ export default class Header extends Component {
 
   render() {
     return (
-      <Context.Consumer>
+      <ContextConsumer>
         {({ tags }) => (
           <div className="Header">
             <label className="Header__title">
@@ -67,7 +68,7 @@ export default class Header extends Component {
             </select>
           </div>
         )}
-      </Context.Consumer>
+      </ContextConsumer>
     );
   }
 }

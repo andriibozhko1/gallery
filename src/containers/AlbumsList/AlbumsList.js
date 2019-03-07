@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import Pagination from "../Pagination/Pagination";
-import AlbumsCard from "./AlbumsCard";
-import Context from '../Context/Context'
+import Pagination from "../../components/Pagination/Pagination";
+import AlbumsCard from "../../components/AlbumsCard/AlbumsCard";
+import { ContextConsumer } from '../../Context/Context';
 import { Link } from "react-router-dom";
 import "./AlbumsList.scss";
-import Loader from '../Loader/Loader'
+import Loader from "../../components/Loader/Loader"
 
 export default class AlbumsList extends Component { 
   state = {    
@@ -30,7 +30,7 @@ export default class AlbumsList extends Component {
   render() {     
     window.scrollTo(0, 0);
     return (
-      <Context.Consumer>
+      <ContextConsumer>
           {(props) =>  {
             this.albums = props.albums;
 
@@ -60,7 +60,7 @@ export default class AlbumsList extends Component {
               )
             }
           }}
-      </Context.Consumer>
+      </ContextConsumer>
     );
   }
 }

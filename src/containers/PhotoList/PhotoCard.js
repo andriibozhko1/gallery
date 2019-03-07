@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Context from "../Context/Context";
-import TagsDropDown from "../TagsDropDown/TagsDropDown";
+import { ContextConsumer } from "../../Context/Context"
+import TagsDropDown from "../../components/TagsDropDown/TagsDropDown"
 import randomColor from "randomcolor";
 import "./PhotoCard.scss";
 
@@ -34,7 +34,7 @@ export default class PhotoCard extends Component {
     const { url, title } = this.props.photoData;
 
     return (
-      <Context.Consumer>
+      <ContextConsumer>
         {props => {
           this.updateData = props.updateData;
 
@@ -63,7 +63,7 @@ export default class PhotoCard extends Component {
             </div>
           );
         }}
-      </Context.Consumer>
+      </ContextConsumer>
     );
   }
 }
